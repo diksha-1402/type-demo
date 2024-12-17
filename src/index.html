@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Example</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Socket.IO Demo</h1>
+    <div id="messages"></div>
+    <input type="text" id="messageInput" placeholder="Enter a message">
+    <button id="sendMessage">Send Message</button>
+
+    <script>
+        const socket = io(); // Connect to the default namespace
+        console.log("Socket initialized:", socket);
+
+        // Join a room
+        socket.emit("joinRoom", "room1");
+
+        // Receive messages
+        socket.on("message", (message) => {
+            const messagesDiv = document.getElementById("messages");
+            const messageElement = document.createElement("div");
+            messageElement.textContent = message;
+            messagesDiv.appendChild(messageElement);
+        });
+
+        // Send a message to the room
+        document.getElementById("sendMessage").addEventListener("click", () => {
+            const message = document.getElementById("messageInput").value;
+            socket.emit("broadcastToRoom", { room: "room1", message });
+        });
+    </script>
+</body>
+</html>
