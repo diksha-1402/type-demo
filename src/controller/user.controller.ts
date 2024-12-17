@@ -16,7 +16,6 @@ class UserController {
           .json({ status: 0, message: "Email already exists", data: {} });
       }
 
-      // Logic for saving a new user
       const newUser = userRepository.create({
         firstName,
         lastName,
@@ -153,6 +152,7 @@ class UserController {
         where: { status: 0 },
         skip: offset,
         take: limit,
+        order: { createdAt: "DESC" }
       });
 
       if (userData.length === 0) {

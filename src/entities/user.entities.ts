@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { Session } from "./session.entities";
-// Define the interface separately for use elsewhere
+
 export interface IUser {
   id?: number;
   firstName: string;

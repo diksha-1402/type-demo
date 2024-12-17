@@ -39,8 +39,7 @@ class AuthMiddleware {
       }
       const userRepository = db.getRepository(User);
       const user = await userRepository.findOneBy({ id: decodeToken.id });
-      console.log(user);
-
+    
       if (!user) {
         return res.status(401).send({ status: 0, message: "User not found" });
       }
